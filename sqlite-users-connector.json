@@ -1,0 +1,11 @@
+{
+  "name": "sqlite-users",
+  "config": {
+    "connector.class": "io.debezium.connector.sqlite.SQLiteSourceConnector",
+    "topic.prefix": "sqlite",
+    "database.file.path": "/home/lisslu/Documents/repos/kafka-demo/users.db",
+    "table.include.list": "users",
+    "snapshot.mode": "initial",
+    "tasks.max": "1"
+  }
+}

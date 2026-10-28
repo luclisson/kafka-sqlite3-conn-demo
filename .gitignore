@@ -1,0 +1,17 @@
+# Laufzeitdaten
+users.db
+users.db-shm
+users.db-wal
+connect.offsets
+*.log
+
+# Lokal entpackte Apache-Kafka-Distribution (Download: https://kafka.apache.org/downloads)
+kafka/
+
+# Extern geklonter & gebauter Debezium-SQLite-Connector
+# (https://github.com/debezium/debezium-connector-sqlite)
+debezium-connector-sqlite/
+
+# IDE
+.vscode/
+.idea/
