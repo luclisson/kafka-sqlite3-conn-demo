@@ -16,7 +16,7 @@ Dieses Projekt ist eine lokale Testumgebung für **Apache Kafka** mit zwei unabh
 | Apache Kafka 4.4.0 (KRaft) | `kafka/` *(nicht Teil des Repos — lokal entpackt, [Download](https://kafka.apache.org/downloads))* | Broker (Port 9092) + Kafka Connect Worker (Port 8083) |
 | Spring-Boot-App | `kafka.demo/` | Spring Boot 4.1.2, Java 27, `POST /messages` → `spring-topic` |
 | SQLite-Datenbank | `users.db` *(Laufzeitdatei, nicht im Repo)* | Tabelle `users`, WAL-Modus |
-| Writer-Script | `insert_users.py` | Schreibt alle 5 s eine Row in `users.db` |
+| Writer-Script | `insert_users.py` | Alle 2 min: 1 neuer Row + 1–3 zufällige Rows ändern |
 | Debezium-SQLite-Connector | externes Projekt [debezium/debezium-connector-sqlite](https://github.com/debezium/debezium-connector-sqlite) *(nicht Teil des Repos — lokal geklont & gebaut)* | Quellen-Connector, Stand 3.8.0-SNAPSHOT (incubating) |
 | Connect-Worker-Config | `connect-standalone-sqlite.properties` | Standalone-Konfiguration |
 | Connector-Config | `sqlite-users-connector.json` | Registrierung des CDC-Connectors |
@@ -27,7 +27,7 @@ Dieses Projekt ist eine lokale Testumgebung für **Apache Kafka** mit zwei unabh
 ```mermaid
 flowchart LR
     subgraph Quelle
-        PY[insert_users.py<br/>alle 5 s INSERT]
+        PY[insert_users.py<br/>alle 2 min: 1 INSERT + 1-3 UPDATEs]
         DB[(users.db<br/>SQLite, WAL)]
         PY -->|schreibt| DB
     end
@@ -99,4 +99,5 @@ Alle Prozesse laufen im Vordergrund und werden mit `Ctrl+C` beendet.
 - [sqlite-source.md](sqlite-source.md) — SQLite-Datenbank und Writer-Script
 - [kafka-connect-cdc.md](kafka-connect-cdc.md) — CDC-Pipeline im Detail
 - [spring-boot-app.md](spring-boot-app.md) — Die Spring-Boot-Anwendung
+- [streamlit-frontend.md](streamlit-frontend.md) — Streamlit-Dashboard für die Topic-Streams
 - [troubleshooting.md](troubleshooting.md) — Bekannte Fehler und Lösungen

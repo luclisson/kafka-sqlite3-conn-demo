@@ -15,3 +15,9 @@ debezium-connector-sqlite/
 # IDE
 .vscode/
 .idea/
+
+# Python-Umgebung des Streamlit-Frontends
+.venv/
+
+# Python
+__pycache__/

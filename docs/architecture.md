@@ -5,7 +5,7 @@
 ```mermaid
 flowchart TD
     subgraph CDC[CDC-Pfad]
-        W[insert_users.py] -->|INSERT alle 5 s| UDB[(users.db)]
+        W[insert_users.py] -->|alle 2 min:<br/>1 INSERT + 1-3 UPDATEs| UDB[(users.db)]
         UDB -->|Trigger schreiben| LOG[(_debezium_cdc_log)]
         LOG -->|Poll| DBZ[Debezium SQLite Connector]
         DBZ -->|Change Events op=r/c/u/d| SU[(Topic sqlite.users)]
@@ -56,7 +56,7 @@ Beide Pfade sind unabhängig; sie teilen sich nur den Broker. Ein Konsument kann
 │   └── src/                                 # de.coba.kafka, s. spring-boot-app.md
 ├── users.db                                 # ⚠️ Laufzeitdatei — SQLite-Datenbank (WAL), CDC-Quelle
 ├── users.db-wal / users.db-shm              # WAL- und Shared-Memory-Dateien (laufend)
-├── insert_users.py                          # Writer: alle 5 s ein INSERT
+├── insert_users.py                          # Writer: alle 2 min 1 INSERT + 1-3 UPDATEs
 ├── connect-standalone-sqlite.properties     # Worker-Konfiguration (Standalone-Modus)
 ├── connect.offsets                          # ⚠️ Laufzeitdatei — Offsets des Connect-Workers
 ├── sqlite-users-connector.json              # Connector-Registrierung (REST-POST)

@@ -28,7 +28,8 @@ Beide sind **nicht Teil dieses Repos**, sondern werden lokal bereitgestellt (sie
 |---|---|
 | `docs/` | Vollständige Dokumentation (Start bei [docs/README.md](docs/README.md)) |
 | `kafka.demo/` | Spring-Boot-Projekt (Producer/Consumer, JSON-Serialisierung) |
-| `insert_users.py` | Writer-Script: alle 5 s ein INSERT in die SQLite-DB |
+| `insert_users.py` | Writer-Script: alle 2 min 1 INSERT + 1–3 UPDATEs auf die SQLite-DB |
+| `dashboard.py` | Streamlit-Frontend: zwei Boxen mit Live-Stream der Topics (`sqlite.users`, `spring-topic`) |
 | `connect-standalone-sqlite.properties` | Konfiguration des Kafka-Connect-Workers |
 | `sqlite-users-connector.json` | Connector-Registrierung (CDC-Quelle `users`) |
 
